@@ -1,12 +1,14 @@
 import {StyleSheet, Text, View, Switch, TouchableOpacity} from 'react-native';
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {SIZES} from '../styles';
+import {useNavigation} from '@react-navigation/native';
+import { LOGGED_IN_SCREEN_NAME } from '../constants/screenConstants';
 
 const Header = ({title, isDarkMode, goBack, switchTheme}) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.iconWrapper} onPress={goBack}>
+      <TouchableOpacity style={styles.iconWrapper} onPress={()=>navigation.navigate(LOGGED_IN_SCREEN_NAME.home)}>
         <Ionicons name="arrow-back" size={24} color="black" />
       </TouchableOpacity>
 
