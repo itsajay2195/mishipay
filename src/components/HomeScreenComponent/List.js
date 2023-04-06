@@ -2,20 +2,30 @@ import {StyleSheet, Text, View, Image, FlatList, ActivityIndicator, TouchableOpa
 import React from 'react';
 import {COLORS, SIZES} from '../../styles';
 
-const ITEM_HEIGHT = SIZES.height * 0.7 - 80;
+const ITEM_HEIGHT = SIZES.height * 0.5 - 80;
 const ITEM_WIDTH = SIZES.width * 0.9;
 
-const renderItem = ({item}) => (
+const renderItem = ({item}) => {
+  const {population,region,capital} = item;
+ return(
   <TouchableOpacity style={styles.renderItemContainer}>
-    <Image source={{uri: item.flags.png}} style={styles.flagStyle} />
-    <View>
-      <Text style={styles.countryNameStyle}>{item.name.common}</Text>
-      <Text style={styles.populationTextStyle}>
-        Population: {item.population}
-      </Text>
-    </View>
-  </TouchableOpacity>
-);
+  <Image source={{uri: item.flags.png}} style={styles.flagStyle} />
+  <View>
+    <Text numberOfLines={1} style={styles.countryNameStyle}>{item.name.common}</Text>
+    <Text style={styles.populationTextStyle}>
+      <Text style={styles.labelStyle}>Population: </Text>{population}
+    </Text>
+    <Text style={styles.populationTextStyle}>
+      <Text style={styles.labelStyle}>Region: </Text>{region}
+    </Text>
+    <Text style={styles.populationTextStyle}>
+      <Text style={styles.labelStyle}>Capital: </Text>{capital}
+    </Text>
+
+  </View>
+</TouchableOpacity>
+ )
+};
 
 const keyExtractor = (item, index) => index.toString();
 
@@ -45,6 +55,7 @@ const styles = StyleSheet.create({
     marginVertical:10
   },
   flagStyle: {width: ITEM_WIDTH - 20, height: ITEM_HEIGHT * 0.5},
-  countryNameStyle: {fontSize: 18, fontWeight: 'bold', color:COLORS.black},
-  populationTextStyle: {fontSize: 14, color: COLORS.grey},
+  countryNameStyle: {marginTop:20,fontSize: 20, fontWeight: 'bold', color:COLORS.black},
+  populationTextStyle: {paddingVertical:5,fontSize: 14, color: COLORS.grey},
+  labelStyle:{fontSize:14, fontWeight:"bold", color:"black"}
 });
