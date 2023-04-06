@@ -7,17 +7,20 @@ import {
   ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
+import React,{useContext} from 'react';
 import {COLORS, SIZES} from '../../styles';
 import {useNavigation} from '@react-navigation/native';
 import { LOGGED_IN_SCREEN_NAME } from '../../constants/screenConstants';
+import { AppContext } from '../../context/AppContext';
 
 const ITEM_HEIGHT = SIZES.height * 0.5 - 80;
 const ITEM_WIDTH = SIZES.width * 0.9;
 let navRef;
+let darkThemed;
 
 const renderItem = ({item}) => {
   const {population, region, capital} = item;
+  const styles = getStyles(darkThemed);
   return (
     <TouchableOpacity onPress={()=>navRef.navigate(LOGGED_IN_SCREEN_NAME.details,{item:item})} style={styles.renderItemContainer}>
       <Image source={{uri: item.flags.png}} style={styles.flagStyle} />
@@ -26,15 +29,15 @@ const renderItem = ({item}) => {
           {item.name.common}
         </Text>
         <Text style={styles.populationTextStyle}>
-          <Text style={styles.labelStyle}>Population: </Text>
+          <Text style={styles.labelStyle}>Population:  </Text>
           {population}
         </Text>
         <Text style={styles.populationTextStyle}>
-          <Text style={styles.labelStyle}>Region: </Text>
+          <Text style={styles.labelStyle}>Region:  </Text>
           {region}
         </Text>
         <Text style={styles.populationTextStyle}>
-          <Text style={styles.labelStyle}>Capital: </Text>
+          <Text style={styles.labelStyle}>Capital:   </Text>
           {capital}
         </Text>
       </View>
@@ -45,8 +48,10 @@ const renderItem = ({item}) => {
 const keyExtractor = (item, index) => index.toString();
 
 const List = ({data, endReachedCall, loading}) => {
+  const {isDarkTheme} = useContext(AppContext);
   const navigation = useNavigation();
   navRef = navigation;
+  darkThemed = isDarkTheme;
 
   return (
     <FlatList
@@ -61,12 +66,12 @@ const List = ({data, endReachedCall, loading}) => {
 };
 
 export default List;
-
-const styles = StyleSheet.create({
+const getStyles = isDarkMode => {
+return StyleSheet.create({
   renderItemContainer: {
     height: ITEM_HEIGHT,
     width: ITEM_WIDTH,
-    backgroundColor: COLORS.white,
+    backgroundColor: isDarkMode ? COLORS.dark : COLORS.white,
     padding: 10,
     elevation: 2,
     marginVertical: 10,
@@ -76,8 +81,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontSize: 20,
     fontWeight: 'bold',
-    color: COLORS.black,
+    color: isDarkMode ? COLORS.white : COLORS.black,
   },
-  populationTextStyle: {paddingVertical: 5, fontSize: 14, color: COLORS.grey},
+  populationTextStyle: {paddingVertical: 5, fontSize: 14, color: isDarkMode ? COLORS.white : COLORS.grey,},
   labelStyle: {fontSize: 14, fontWeight: 'bold', color: 'black'},
-});
+})}
