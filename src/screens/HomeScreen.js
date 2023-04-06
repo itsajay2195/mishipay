@@ -1,10 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React,{useContext} from 'react';
+import { AppContext } from '../context/AppContext';
 
 const HomeScreen = () => {
+    const { loading } = useContext(AppContext);
+
+
   return (
     <View>
-      <Text>HomeScreen</Text>
+      <Text>{loading.toString()}</Text>
     </View>
   )
 }
