@@ -71,18 +71,19 @@ return StyleSheet.create({
   renderItemContainer: {
     height: ITEM_HEIGHT,
     width: ITEM_WIDTH,
-    backgroundColor: isDarkMode ? COLORS.dark : COLORS.white,
+    backgroundColor: isDarkMode ? COLORS.dark : COLORS.light,
     padding: 10,
-    elevation: 2,
+    elevation: 6,
     marginVertical: 10,
+    shadowColor: COLORS.grey,
   },
   flagStyle: {width: ITEM_WIDTH - 20, height: ITEM_HEIGHT * 0.5},
   countryNameStyle: {
     marginTop: 20,
     fontSize: 20,
     fontWeight: 'bold',
-    color: isDarkMode ? COLORS.white : COLORS.black,
+    color: isDarkMode ? COLORS.light : COLORS.black,
   },
-  populationTextStyle: {paddingVertical: 5, fontSize: 14, color: isDarkMode ? COLORS.white : COLORS.grey,},
+  populationTextStyle: {paddingVertical: 5, fontSize: 14, color: isDarkMode ? COLORS.light : COLORS.grey,},
   labelStyle: {fontSize: 14, fontWeight: 'bold', color: 'black'},
 })}

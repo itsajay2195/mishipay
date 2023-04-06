@@ -3,8 +3,9 @@ import React from 'react';
 // import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
 import { LOGGED_IN_SCREEN_NAME } from '../constants/screenConstants';
+import { COLORS } from '../styles';
 
-const Header = () => {
+const Header = ({isDarkTheme}) => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
@@ -25,5 +26,5 @@ const styles = StyleSheet.create({
     zIndex: 10,
     flex:1
   },
-  iconWrapper:{height:40,width:40,backgroundColor:"gray", justifyContent:"center",alignItems:"center", borderRadius:20,opacity:0.7}
+  iconWrapper:{height:40,width:40, backgroundColor:COLORS.light,justifyContent:"center",alignItems:"center", borderRadius:20,opacity:0.9}
 });

@@ -6,12 +6,14 @@ import {fetchcountries, fetchSearchResults, resetPage} from '../utils/helpers';
 import SearchBar from '../components/SearchBar';
 import debounce from 'lodash.debounce';
 import Filter from '../components/HomeScreenComponent/Filter';
+import { COLORS } from '../styles';
 
 const HomeScreen = () => {
-  const {loading, setLoading, setCountries, countries, setRegions, regions} =
+  const {loading, setLoading, setCountries, countries, setRegions, regions,isDarkTheme} =
     useContext(AppContext);
-  const [searchText, setSearchText] = useState(null);
+  const [searchText] = useState(null);
   const [filtereData, setFilteredData] = useState([]);
+  const styles = getStyles(isDarkTheme);
 
   const resetFilteredData= ()=> setFilteredData([])
   const resetSearchText= ()=> handleSearch("")
@@ -62,20 +64,16 @@ const HomeScreen = () => {
   }, [loading, searchText]);
 
   return (
-    <View style={{flex: 1}}>
+    <View style={styles.container}>
       <View
-        style={{
-          backgroundColor: 'white',
-          height: 80,
-          padding: 20,
-        }}>
-        <Text style={{fontSize: 24, fontWeight: 'bold', color: 'black'}}>
+        style={styles.heading}>
+        <Text style={styles.headingText}>
           where in the world?
         </Text>
       </View>
 
-      <View style={styles.container}>
-        <SearchBar onChangeText={handleSearch} value={searchText} />
+      <View style={styles.content}>
+        <SearchBar onChangeText={handleSearch} value={searchText} isDarkTheme={isDarkTheme} />
         <Filter resetFilteredData={resetFilteredData} resetSearchText={resetSearchText} />
         <List
           data={filtereData && filtereData.length > 0 ? filtereData : countries}
@@ -89,6 +87,14 @@ const HomeScreen = () => {
 
 export default HomeScreen;
 
-const styles = StyleSheet.create({
-  container: {flex: 1, marginTop: 5, padding: 20, backgroundColor: 'white'},
-});
+const getStyles = isDarkMode => {
+  return  StyleSheet.create({
+  container:{flex: 1, backgroundColor: isDarkMode ? COLORS.dark  : COLORS.white},
+  content: {flex: 1, marginTop: 5, padding: 20, backgroundColor: isDarkMode ? COLORS.dark:COLORS.white},
+  heading:{
+    backgroundColor: isDarkMode ? COLORS.dark:COLORS.white,
+    height: 80,
+    padding: 20,
+  },
+  headingText:{fontSize: 24, fontWeight: 'bold', color: isDarkMode ? COLORS.white  : COLORS.dark}
+})}
