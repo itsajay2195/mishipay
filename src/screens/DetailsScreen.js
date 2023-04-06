@@ -13,11 +13,12 @@ import {SIZES, COLORS} from '../styles';
 import {fetchCountryData} from '../utils/helpers';
 import {LOGGED_IN_SCREEN_NAME} from '../constants/screenConstants';
 import {AppContext} from '../context/AppContext';
+import ThemeSwitchButton from '../components/ThemeSwitch';
 
 const ITEM_HEIGHT = SIZES.height * 0.5;
 const ITEM_WIDTH = SIZES.width;
 const DetailsScreen = ({navigation}) => {
-  const {isDarkTheme} = useContext(AppContext);
+  const {isDarkTheme,changeTheme} = useContext(AppContext);
   const route = useRoute();
   const {item} = route.params;
   const {
@@ -44,6 +45,7 @@ const DetailsScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <ThemeSwitchButton isDarkMode={isDarkTheme} changeTheme={changeTheme}/>
       <Header isDarkTheme={isDarkTheme}/>
       <ScrollView contentContainerStyle={{flex: 1}}>
         <Image resizeMode='stretch' source={{uri: item.flags.png}} style={styles.flagStyle} />

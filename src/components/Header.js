@@ -1,6 +1,5 @@
 import {StyleSheet, View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
-// import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
 import { LOGGED_IN_SCREEN_NAME } from '../constants/screenConstants';
 import { COLORS } from '../styles';

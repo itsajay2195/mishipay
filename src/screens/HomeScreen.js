@@ -7,9 +7,10 @@ import SearchBar from '../components/SearchBar';
 import debounce from 'lodash.debounce';
 import Filter from '../components/HomeScreenComponent/Filter';
 import { COLORS } from '../styles';
+import ThemeSwitchButton from '../components/ThemeSwitch';
 
 const HomeScreen = () => {
-  const {loading, setLoading, setCountries, countries, setRegions, regions,isDarkTheme} =
+  const {loading, setLoading, setCountries, countries, setRegions, regions,isDarkTheme,changeTheme} =
     useContext(AppContext);
   const [searchText] = useState(null);
   const [filtereData, setFilteredData] = useState([]);
@@ -65,13 +66,14 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
+       <ThemeSwitchButton isDarkMode={isDarkTheme} changeTheme={changeTheme}/>
       <View
         style={styles.heading}>
         <Text style={styles.headingText}>
           where in the world?
         </Text>
+       
       </View>
-
       <View style={styles.content}>
         <SearchBar onChangeText={handleSearch} value={searchText} isDarkTheme={isDarkTheme} />
         <Filter resetFilteredData={resetFilteredData} resetSearchText={resetSearchText} />
