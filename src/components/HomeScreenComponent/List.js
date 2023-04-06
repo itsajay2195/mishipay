@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View, Image, FlatList} from 'react-native';
-import React from 'react';
+import React, {useContext} from 'react';
 import {SIZES} from '../../styles';
 
 const ITEM_HEIGHT = SIZES.height * 0.7 - 80;
@@ -19,9 +19,16 @@ const renderItem = ({item}) => (
 
 const keyExtractor = (item, index) => index.toString();
 
-const List = ({data}) => {
+const List = ({data,endReachedCall}) => {
+
   return (
-    <FlatList data={data} renderItem={renderItem} keyExtractor={keyExtractor} />
+    <FlatList
+      data={data}
+      renderItem={renderItem}
+      keyExtractor={keyExtractor}
+      onEndReached={endReachedCall}
+      onEndReachedThreshold={0.1}
+    />
   );
 };
 
@@ -35,10 +42,9 @@ const styles = StyleSheet.create({
     // elevation: 4, // Add shadow on Android devices
     // shadowColor: '#000', // Add shadow color on iOS devices
     // shadowOpacity: 0.3,
-    padding:10
-    
+    padding: 10,
   },
-  flagStyle: {width: ITEM_WIDTH-20, height: ITEM_HEIGHT * 0.5},
+  flagStyle: {width: ITEM_WIDTH - 20, height: ITEM_HEIGHT * 0.5},
   countryNameStyle: {fontSize: 18, fontWeight: 'bold'},
   populationTextStyle: {fontSize: 14, color: 'gray'},
 });
