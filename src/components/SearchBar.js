@@ -12,7 +12,7 @@ const SearchBar = ({onChangeText, value}) => {
         onChangeText={onChangeText}
         value={value}
         style={styles.searchInputStyle}
-        placeholder={'SearchBar'}></TextInput>
+        placeholder={'search for a country'}></TextInput>
     </View>
   );
 };
