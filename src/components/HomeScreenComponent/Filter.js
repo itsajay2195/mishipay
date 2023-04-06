@@ -9,9 +9,10 @@ import {fetchRegionResults} from '../../utils/helpers';
 const COMPONENT_HEIGHT = 60;
 
 const Filter = ({resetFilteredData}) => {
-  const {isDarkMode, regions, setCountries} = useContext(AppContext);
+  const {regions, setCountries, isDarkTheme} = useContext(AppContext);
   const [showDD, setShowDD] = useState(false);
   const [value, setValue] = useState(null);
+  const styles = getStyles(isDarkTheme);
 
   useEffect(() => {
     if (value) {
@@ -32,7 +33,7 @@ const Filter = ({resetFilteredData}) => {
       <Ionicons
         name={showDD ? 'caret-up' : 'caret-down'}
         size={18}
-        color={!isDarkMode ? '#000000' : '#FFFFFF'}
+        color={!isDarkTheme ? '#000000' : '#FFFFFF'}
       />
       {showDD && (
         <View style={styles.modalStyle}>
@@ -45,27 +46,29 @@ const Filter = ({resetFilteredData}) => {
 
 export default Filter;
 
-const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    zIndex: 10,
-    alignItems: 'center',
-    marginTop: 5,
-    height: COMPONENT_HEIGHT,
-    padding: 10,
-    width: '100%',
-    flexDirection: 'row',
-    backgroundColor: COLORS.white,
-    elevation: 10,
-    shadowColor: COLORS.grey,
-  },
-  textStyle: {flex: 1, fontSize: 18, fontWeight: 'bold'},
-  modalStyle: {
-    position: 'absolute',
-    flex: 1,
-    top: 65,
-    width: '106%',
-    padding: 5,
-    backgroundColor: COLORS.white,
-  },
-});
+const getStyles = isDarkMode => {
+  return StyleSheet.create({
+    container: {
+      display: 'flex',
+      zIndex: 10,
+      alignItems: 'center',
+      marginTop: 5,
+      height: COMPONENT_HEIGHT,
+      padding: 10,
+      width: '100%',
+      flexDirection: 'row',
+      backgroundColor:isDarkMode ? COLORS.dark: COLORS.white,
+      elevation: 10,
+      shadowColor:isDarkMode ? COLORS.light: COLORS.grey,
+    },
+    textStyle: {flex: 1, fontSize: 18, fontWeight: 'bold', color:isDarkMode ? COLORS.white: COLORS.black},
+    modalStyle: {
+      position: 'absolute',
+      flex: 1,
+      top: 65,
+      width: '106%',
+      padding: 5,
+      backgroundColor: isDarkMode ? COLORS.dark: COLORS.white,
+    },
+  });
+};

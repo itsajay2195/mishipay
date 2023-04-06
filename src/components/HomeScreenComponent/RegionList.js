@@ -1,24 +1,36 @@
-import {StyleSheet, Text, View, Image, FlatList, ActivityIndicator, TouchableOpacity} from 'react-native';
-import React from 'react';
+import {
+  StyleSheet,
+  Text,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
+import React, {useContext} from 'react';
 import {COLORS, SIZES} from '../../styles';
+import {AppContext} from '../../context/AppContext';
 
-const ITEM_HEIGHT = (SIZES.height * 0.7) * 0.07;
-const ITEM_WIDTH = SIZES.width * 0.9;
+const ITEM_HEIGHT = SIZES.height * 0.7 * 0.07;
+let darkThemed;
 
-const renderItem = ({item, onPress}) => (
-  <TouchableOpacity  onPress = {()=>onPress(item)} style={styles.renderItemContainer}>
+const renderItem = ({item, onPress}) => {
+  const styles = getStyles(darkThemed);
+  return (
+    <TouchableOpacity
+      onPress={() => onPress(item)}
+      style={styles.renderItemContainer}>
       <Text style={styles.countryNameStyle}>{item}</Text>
-  </TouchableOpacity>
-);
+    </TouchableOpacity>
+  );
+};
 
 const keyExtractor = (item, index) => index.toString();
 
 const RegionList = ({data, onPress}) => {
-
+  const {isDarkTheme} = useContext(AppContext);
+  darkThemed = isDarkTheme;
   return (
     <FlatList
       data={data}
-      renderItem={({ item }) => renderItem({ item, onPress })}
+      renderItem={({item}) => renderItem({item, onPress})}
       keyExtractor={keyExtractor}
       style={{flex: 1}}
     />
@@ -27,12 +39,14 @@ const RegionList = ({data, onPress}) => {
 
 export default RegionList;
 
-const styles = StyleSheet.create({
-  renderItemContainer: {
-    height: ITEM_HEIGHT,
-    width: "100%",
-    backgroundColor:COLORS.white,
-    padding: 2,
-  },
-  countryNameStyle: {fontSize: 18, fontWeight: 'bold', color:COLORS.black},
-});
+const getStyles = isDarkMode => {
+  return StyleSheet.create({
+    renderItemContainer: {
+      height: ITEM_HEIGHT,
+      width: '100%',
+      backgroundColor: isDarkMode ? COLORS.dark: COLORS.white,
+      padding: 2,
+    },
+    countryNameStyle: {fontSize: 18, fontWeight: 'bold', color: isDarkMode ? COLORS.white : COLORS.black},
+  });
+};

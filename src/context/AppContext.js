@@ -4,7 +4,7 @@ export const AppContext = createContext();
 
 const AppContextProvider = ({children}) => {
   const [countries, setCountries] = useState([]);
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(true);
   const [loading, setLoading] = useState(false);
   const [regions, setRegions] = useState([]);
 
