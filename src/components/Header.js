@@ -1,40 +1,16 @@
-import {StyleSheet, Text, View, Switch, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+// import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
 import { LOGGED_IN_SCREEN_NAME } from '../constants/screenConstants';
 
-const Header = ({title, isDarkMode, goBack, switchTheme}) => {
+const Header = () => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.iconWrapper} onPress={()=>navigation.navigate(LOGGED_IN_SCREEN_NAME.home)}>
-        <Ionicons name="arrow-back" size={24} color="black" />
+        <Image  style={{height:24,width:24}} source={require("../assets/back.png")}/>
       </TouchableOpacity>
-
-      <Text style={styles.switchText}>{title}</Text>
-
-      {/* <View style={styles.switchContainer}>
-        <Ionicons
-          name={!isDarkMode ? 'md-sunny' : 'md-moon'}
-          size={24}
-          color={!isDarkMode ? '#000000' : '#FFFFFF'}
-        />
-
-        <Switch
-          trackColor={{false: '#767577', true: '#81b0ff'}}
-          thumbColor={isDarkMode ? '#f5dd4b' : '#f4f3f4'}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={switchTheme}
-          value={isDarkMode}
-          style={{ transform: [{ scaleX: 0.7 }, { scaleY: 0.7 }] }}
-        /> */}
-      {/* <Ionicons
-          name={!isDarkMode ? 'md-sunny' : 'md-moon'}
-          size={24}
-          color={!isDarkMode ? '#000000' : '#FFFFFF'}
-        /> */}
-      {/* </View> */}
     </View>
   );
 };
@@ -50,16 +26,4 @@ const styles = StyleSheet.create({
     flex:1
   },
   iconWrapper:{height:40,width:40,backgroundColor:"gray", justifyContent:"center",alignItems:"center", borderRadius:20,opacity:0.7}
-  // headeTitle: {
-  //   fontWeight: 'bold',
-  //   fontSize: SIZES.h2,
-  // },
-  // switchContainer: {
-  //   flexDirection: 'row',
-  //   alignItems: 'center',
-  // },
-  // switchText: {
-  //   marginHorizontal: 5,
-  //   fontWeight: 'bold',
-  // },
 });

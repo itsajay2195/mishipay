@@ -1,6 +1,6 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
-import {COLORS, SIZES} from '../../styles';
+import {COLORS} from '../../styles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {AppContext} from '../../context/AppContext';
 import RegionList from './RegionList';
