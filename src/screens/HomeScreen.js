@@ -3,6 +3,7 @@ import React, {useContext, useEffect} from 'react';
 import {AppContext} from '../context/AppContext';
 import List from '../components/HomeScreenComponent/List';
 import {fetchcountries} from '../utils/helpers';
+import SearchBar from '../components/SearchBar';
 
 const HomeScreen = () => {
   const {loading, setLoading, isDarkTheme, setCountries, countries} =
@@ -35,6 +36,7 @@ const HomeScreen = () => {
       </View>
 
       <View style={styles.container}>
+        <SearchBar/>
         <List data={countries} endReachedCall={endReachedCall} loading={loading}/>
       </View>
     </View>

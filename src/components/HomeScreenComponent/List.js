@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View, Image, FlatList, ActivityIndicator} from 'react-native';
 import React from 'react';
-import {SIZES} from '../../styles';
+import {COLORS, SIZES} from '../../styles';
 
 const ITEM_HEIGHT = SIZES.height * 0.7 - 80;
 const ITEM_WIDTH = SIZES.width * 0.9;
@@ -44,8 +44,11 @@ const styles = StyleSheet.create({
     // shadowColor: '#000', // Add shadow color on iOS devices
     // shadowOpacity: 0.3,
     padding: 10,
+  
+    elevation:2,
+    marginVertical:10
   },
   flagStyle: {width: ITEM_WIDTH - 20, height: ITEM_HEIGHT * 0.5},
-  countryNameStyle: {fontSize: 18, fontWeight: 'bold'},
-  populationTextStyle: {fontSize: 14, color: 'gray'},
+  countryNameStyle: {fontSize: 18, fontWeight: 'bold', color:COLORS.black},
+  populationTextStyle: {fontSize: 14, color: COLORS.grey},
 });
