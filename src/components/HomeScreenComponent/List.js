@@ -39,12 +39,8 @@ const styles = StyleSheet.create({
   renderItemContainer: {
     height: ITEM_HEIGHT,
     width: ITEM_WIDTH,
-    // backgroundColor: '#fff',
-    // elevation: 4, // Add shadow on Android devices
-    // shadowColor: '#000', // Add shadow color on iOS devices
-    // shadowOpacity: 0.3,
+    backgroundColor:COLORS.white,
     padding: 10,
-  
     elevation:2,
     marginVertical:10
   },
