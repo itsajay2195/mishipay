@@ -18,7 +18,7 @@ const Filter = ({resetFilteredData}) => {
     if (value) {
       fetchRegionResults(value).then(data => setCountries(data));
     }
-  }, [value]);
+  }, [value,setCountries]);
   const onListItemPress = item => {
     resetFilteredData();
     setValue(item);
@@ -57,18 +57,23 @@ const getStyles = isDarkMode => {
       padding: 10,
       width: '100%',
       flexDirection: 'row',
-      backgroundColor:isDarkMode ? COLORS.dark: COLORS.white,
+      backgroundColor: isDarkMode ? COLORS.dark : COLORS.white,
       elevation: 10,
-      shadowColor:isDarkMode ? COLORS.light: COLORS.grey,
+      shadowColor: isDarkMode ? COLORS.light : COLORS.grey,
     },
-    textStyle: {flex: 1, fontSize: 18, fontWeight: 'bold', color:isDarkMode ? COLORS.white: COLORS.black},
+    textStyle: {
+      flex: 1,
+      fontSize: 18,
+      fontWeight: 'bold',
+      color: isDarkMode ? COLORS.white : COLORS.black,
+    },
     modalStyle: {
       position: 'absolute',
       flex: 1,
       top: 65,
       width: '106%',
       padding: 5,
-      backgroundColor: isDarkMode ? COLORS.dark: COLORS.white,
+      backgroundColor: isDarkMode ? COLORS.dark : COLORS.white,
     },
   });
 };
