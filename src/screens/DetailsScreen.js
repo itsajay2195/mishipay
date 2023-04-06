@@ -11,7 +11,7 @@ import {useRoute} from '@react-navigation/native';
 import Header from '../components/Header';
 import {SIZES, COLORS} from '../styles';
 import {fetchCountryData} from '../utils/helpers';
-import { LOGGED_IN_SCREEN_NAME } from '../constants/screenConstants';
+import {LOGGED_IN_SCREEN_NAME} from '../constants/screenConstants';
 
 const ITEM_HEIGHT = SIZES.height * 0.5;
 const ITEM_WIDTH = SIZES.width;
@@ -33,10 +33,10 @@ const DetailsScreen = ({navigation}) => {
   useEffect(() => {
     const countryDataasync = async () => {
       const data = await fetchCountryData(borders);
-      console.log('oo', data[0])
       setCountryData(data);
     };
-    countryDataasync();
+
+    borders ? countryDataasync()  : null;
   }, []);
 
   return (
@@ -80,26 +80,33 @@ const DetailsScreen = ({navigation}) => {
             <Text style={styles.labelStyle}>Capital: </Text>
             {capital}
           </Text>
-          <Text style={styles.populationTextStyle}>
-            <Text style={styles.labelStyle}>Borders: </Text>
-          </Text>
+          {borders.length>0 ? <>
+            <Text style={styles.populationTextStyle}>
+              <Text style={styles.labelStyle}>Borders: </Text>
+            </Text>
 
-          <View
-            style={{display: 'flex', flexWrap: 'wrap', flexDirection: 'row'}}>
-            {countryData.map(country => (
-              <TouchableOpacity
-                onPress={()=>navigation.navigate(LOGGED_IN_SCREEN_NAME.details,{item:country})}
-                style={{
-                  padding: 5,
-                  backgroundColor: COLORS.white,
-                  elevation: 10,
-                  shadowColor: COLORS.grey,
-                  marginRight: 5,
-                }}>
-                <Text>{country.name.common}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
+            <View
+              style={{display: 'flex', flexWrap: 'wrap', flexDirection: 'row'}}>
+              {countryData.map((country,index) => (
+                <TouchableOpacity
+                  key={`${country}${index}`}
+                  onPress={() =>
+                    navigation.navigate(LOGGED_IN_SCREEN_NAME.details, {
+                      item: country,
+                    })
+                  }
+                  style={{
+                    padding: 5,
+                    backgroundColor: COLORS.white,
+                    elevation: 10,
+                    shadowColor: COLORS.grey,
+                    marginRight: 5,
+                  }}>
+                  <Text>{country.name.common}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </>:null}
         </View>
       </ScrollView>
     </View>
