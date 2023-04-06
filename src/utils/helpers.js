@@ -2,7 +2,7 @@ const limit = 10;
 let currentPage = 1;
 
 export const fetchcountries = async () => {
-  let url = 'https://restcountries.com/v3.1/all';
+  let url = 'https://restcountries.com/v3.1/all?fields=name,capital,currencies,population,region,subregion,borders,flags';
   try {
     const startIndex = (currentPage - 1) * limit;
     const endIndex = startIndex + limit;

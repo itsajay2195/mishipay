@@ -6,6 +6,7 @@ const AppContextProvider = ({children}) => {
   const [countries, setCountries] = useState([]);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [regions, setRegions] = useState(false);
 
   const changeTheme = () => {
     setIsDarkTheme(theme => !theme);
@@ -18,7 +19,9 @@ const AppContextProvider = ({children}) => {
     setIsDarkTheme,
     loading,
     setLoading,
-    changeTheme
+    changeTheme,
+    regions,
+    setRegions
   };
 
   return <AppContext.Provider value={values}>{children}</AppContext.Provider>;

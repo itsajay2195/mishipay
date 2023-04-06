@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, Image, FlatList, ActivityIndicator} from 'react-native';
+import {StyleSheet, Text, View, Image, FlatList, ActivityIndicator, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {COLORS, SIZES} from '../../styles';
 
@@ -6,7 +6,7 @@ const ITEM_HEIGHT = SIZES.height * 0.7 - 80;
 const ITEM_WIDTH = SIZES.width * 0.9;
 
 const renderItem = ({item}) => (
-  <View style={styles.renderItemContainer}>
+  <TouchableOpacity style={styles.renderItemContainer}>
     <Image source={{uri: item.flags.png}} style={styles.flagStyle} />
     <View>
       <Text style={styles.countryNameStyle}>{item.name.common}</Text>
@@ -14,7 +14,7 @@ const renderItem = ({item}) => (
         Population: {item.population}
       </Text>
     </View>
-  </View>
+  </TouchableOpacity>
 );
 
 const keyExtractor = (item, index) => index.toString();
