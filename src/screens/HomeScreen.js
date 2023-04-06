@@ -5,17 +5,22 @@ import List from '../components/HomeScreenComponent/List';
 import {fetchcountries} from '../utils/helpers';
 
 const HomeScreen = () => {
-  const {loading, isDarkTheme, setCountries, countries} =
+  const {loading, setLoading, isDarkTheme, setCountries, countries} =
     useContext(AppContext);
   useEffect(() => {
     fetchcountries().then(data => setCountries(data));
   }, []);
 
-
   const endReachedCall = async () => {
-    const nextData = await fetchcountries();
-    setCountries(prevData => [...prevData, ...nextData]);
-  }
+    if (!loading) {
+      setLoading(true);
+      setTimeout(async()=>{
+        const nextData = await fetchcountries();
+      setCountries(prevData => [...prevData, ...nextData]);
+      setLoading(false);
+      },1000)
+    }
+  };
   return (
     <View style={{flex: 1}}>
       <View
@@ -30,7 +35,7 @@ const HomeScreen = () => {
       </View>
 
       <View style={styles.container}>
-        <List data={countries} endReachedCall={endReachedCall} />
+        <List data={countries} endReachedCall={endReachedCall} loading={loading}/>
       </View>
     </View>
   );

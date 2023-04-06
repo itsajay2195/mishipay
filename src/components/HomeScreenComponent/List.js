@@ -1,5 +1,5 @@
-import {StyleSheet, Text, View, Image, FlatList} from 'react-native';
-import React, {useContext} from 'react';
+import {StyleSheet, Text, View, Image, FlatList, ActivityIndicator} from 'react-native';
+import React from 'react';
 import {SIZES} from '../../styles';
 
 const ITEM_HEIGHT = SIZES.height * 0.7 - 80;
@@ -19,7 +19,7 @@ const renderItem = ({item}) => (
 
 const keyExtractor = (item, index) => index.toString();
 
-const List = ({data,endReachedCall}) => {
+const List = ({data,endReachedCall, loading}) => {
 
   return (
     <FlatList
@@ -28,6 +28,7 @@ const List = ({data,endReachedCall}) => {
       keyExtractor={keyExtractor}
       onEndReached={endReachedCall}
       onEndReachedThreshold={0.1}
+      ListFooterComponent={loading ? <ActivityIndicator /> : null}
     />
   );
 };
