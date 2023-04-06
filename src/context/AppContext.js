@@ -6,7 +6,7 @@ const AppContextProvider = ({children}) => {
   const [countries, setCountries] = useState([]);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [regions, setRegions] = useState(false);
+  const [regions, setRegions] = useState([]);
 
   const changeTheme = () => {
     setIsDarkTheme(theme => !theme);

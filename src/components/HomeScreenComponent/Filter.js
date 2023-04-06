@@ -4,22 +4,23 @@ import {COLORS, SIZES} from '../../styles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {AppContext} from '../../context/AppContext';
 import RegionList from './RegionList';
+import {fetchRegionResults} from '../../utils/helpers';
 
 const COMPONENT_HEIGHT = 60;
-const DD_HEIGHT = SIZES.height * 0.3;
 
 const Filter = () => {
-  const {isDarkMode, regions} = useContext(AppContext);
+  const {isDarkMode, regions, setCountries} = useContext(AppContext);
   const [showDD, setShowDD] = useState(false);
   const [value, setValue] = useState(null);
 
   useEffect(() => {
-    if (value && showDD) {
-      setShowDD(!showDD);
+    if (value) {
+      fetchRegionResults(value).then(data => setCountries(data));
     }
-  }, [value, showDD]);
+  }, [value]);
   const onListItemPress = item => {
     setValue(item);
+    setShowDD(!showDD);
   };
   return (
     <TouchableOpacity

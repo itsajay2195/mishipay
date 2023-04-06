@@ -29,3 +29,16 @@ export const fetchSearchResults = async searchQuery => {
 export const resetPage = () => {
   currentPage = 1;
 };
+
+export const fetchRegionResults = async region => {
+  let url = `https://restcountries.com/v3.1/region/${region}`;
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+

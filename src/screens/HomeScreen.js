@@ -8,7 +8,8 @@ import debounce from 'lodash.debounce';
 import Filter from '../components/HomeScreenComponent/Filter';
 
 const HomeScreen = () => {
-  const {loading, setLoading, setCountries, countries, setRegions} = useContext(AppContext);
+  const {loading, setLoading, setCountries, countries, setRegions, regions} =
+    useContext(AppContext);
   const [searchText] = useState(null);
   const [filtereData, setFilteredData] = useState([]);
 
@@ -17,10 +18,16 @@ const HomeScreen = () => {
   }, [searchText]);
 
   useEffect(() => {
-    let regionsFilter = countries
-      .map(item => item.region) // extract the regions from the objects
-      .filter((value, index, self) => self.indexOf(value) === index).sort(); // remove duplicates
-    setRegions(regionsFilter);
+    console.log('ue2 out', regions);
+    if (regions.length <= 0) {
+      console.log('ue2');
+      let regionsFilter = countries
+        .map(item => item.region) // extract the regions from the objects
+        .filter((value, index, self) => self.indexOf(value) === index)
+        .sort(); // remove duplicates
+
+      setRegions(regionsFilter);
+    }
   }, [countries]);
 
   const handleSearch = useCallback(
@@ -67,7 +74,7 @@ const HomeScreen = () => {
 
       <View style={styles.container}>
         <SearchBar onChangeText={handleSearch} value={searchText} />
-        <Filter/>
+        <Filter />
         <List
           data={filtereData && filtereData.length > 0 ? filtereData : countries}
           endReachedCall={endReachedCall}
