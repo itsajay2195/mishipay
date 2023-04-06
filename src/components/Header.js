@@ -3,10 +3,26 @@ import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {SIZES} from '../styles';
 
-const Header = ({title, isDarkMode, showBack, toggleTheme}) => {
+const Header = ({title, isDarkMode, goBack, switchTheme}) => {
   return (
-    <View>
-      <Text>Header</Text>
+    <View style={styles.container}>
+      <TouchableOpacity onPress={goBack}>
+        <Ionicons name="arrow-back" size={24} color="black" />
+      </TouchableOpacity>
+
+      <Text style={styles.switchText}>{title}</Text>
+
+      <View style={styles.switchContainer}>
+        <Text style={styles.switchText}>light</Text>
+        <Switch
+          trackColor={{false: '#767577', true: '#81b0ff'}}
+          thumbColor={isDarkMode ? '#f5dd4b' : '#f4f3f4'}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={switchTheme}
+          value={isDarkMode}
+        />
+         <Text style={styles.switchText}>dark</Text>
+      </View>
     </View>
   );
 };
