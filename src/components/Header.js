@@ -13,15 +13,25 @@ const Header = ({title, isDarkMode, goBack, switchTheme}) => {
       <Text style={styles.switchText}>{title}</Text>
 
       <View style={styles.switchContainer}>
-        <Text style={styles.switchText}>light</Text>
+        <Ionicons
+          name={!isDarkMode ? 'md-sunny' : 'md-moon'}
+          size={24}
+          color={!isDarkMode ? '#000000' : '#FFFFFF'}
+        />
+
         <Switch
           trackColor={{false: '#767577', true: '#81b0ff'}}
           thumbColor={isDarkMode ? '#f5dd4b' : '#f4f3f4'}
           ios_backgroundColor="#3e3e3e"
           onValueChange={switchTheme}
           value={isDarkMode}
+          style={{ transform: [{ scaleX: 0.7 }, { scaleY: 0.7 }] }}
         />
-         <Text style={styles.switchText}>dark</Text>
+       {/* <Ionicons
+          name={!isDarkMode ? 'md-sunny' : 'md-moon'}
+          size={24}
+          color={!isDarkMode ? '#000000' : '#FFFFFF'}
+        /> */}
       </View>
     </View>
   );
@@ -34,7 +44,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: 'red',
+    backgroundColor: 'transparent',
     height: 60,
     paddingHorizontal: 20,
   },
