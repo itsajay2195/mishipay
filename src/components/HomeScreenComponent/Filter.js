@@ -8,7 +8,7 @@ import {fetchRegionResults} from '../../utils/helpers';
 
 const COMPONENT_HEIGHT = 60;
 
-const Filter = () => {
+const Filter = ({resetFilteredData,resetSearchText}) => {
   const {isDarkMode, regions, setCountries} = useContext(AppContext);
   const [showDD, setShowDD] = useState(false);
   const [value, setValue] = useState(null);
@@ -19,6 +19,8 @@ const Filter = () => {
     }
   }, [value]);
   const onListItemPress = item => {
+    resetFilteredData();
+    resetSearchText();
     setValue(item);
     setShowDD(!showDD);
   };

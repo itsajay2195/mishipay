@@ -10,22 +10,23 @@ import Filter from '../components/HomeScreenComponent/Filter';
 const HomeScreen = () => {
   const {loading, setLoading, setCountries, countries, setRegions, regions} =
     useContext(AppContext);
-  const [searchText] = useState(null);
+  const [searchText, setSearchText] = useState(null);
   const [filtereData, setFilteredData] = useState([]);
+
+  const resetFilteredData= ()=> setFilteredData([])
+  const resetSearchText= ()=> setSearchText(null)
 
   useEffect(() => {
     fetchcountries().then(data => setCountries(data));
   }, [searchText]);
 
   useEffect(() => {
-    console.log('ue2 out', regions);
     if (regions.length <= 0) {
       console.log('ue2');
       let regionsFilter = countries
         .map(item => item.region) // extract the regions from the objects
         .filter((value, index, self) => self.indexOf(value) === index)
         .sort(); // remove duplicates
-
       setRegions(regionsFilter);
     }
   }, [countries]);
@@ -44,6 +45,7 @@ const HomeScreen = () => {
     }, 500),
     [],
   );
+  
 
   const endReachedCall = useCallback(async () => {
     if (!loading) {
@@ -74,7 +76,7 @@ const HomeScreen = () => {
 
       <View style={styles.container}>
         <SearchBar onChangeText={handleSearch} value={searchText} />
-        <Filter />
+        <Filter resetFilteredData={resetFilteredData} resetSearchText={resetSearchText} />
         <List
           data={filtereData && filtereData.length > 0 ? filtereData : countries}
           endReachedCall={endReachedCall}
