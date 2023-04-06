@@ -14,7 +14,7 @@ const HomeScreen = () => {
   const [filtereData, setFilteredData] = useState([]);
 
   const resetFilteredData= ()=> setFilteredData([])
-  const resetSearchText= ()=> setSearchText(null)
+  const resetSearchText= ()=> handleSearch("")
 
   useEffect(() => {
     fetchcountries().then(data => setCountries(data));
