@@ -6,13 +6,13 @@ import {SIZES} from '../styles';
 const Header = ({title, isDarkMode, goBack, switchTheme}) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={goBack}>
+      <TouchableOpacity style={styles.iconWrapper} onPress={goBack}>
         <Ionicons name="arrow-back" size={24} color="black" />
       </TouchableOpacity>
 
       <Text style={styles.switchText}>{title}</Text>
 
-      <View style={styles.switchContainer}>
+      {/* <View style={styles.switchContainer}>
         <Ionicons
           name={!isDarkMode ? 'md-sunny' : 'md-moon'}
           size={24}
@@ -26,13 +26,13 @@ const Header = ({title, isDarkMode, goBack, switchTheme}) => {
           onValueChange={switchTheme}
           value={isDarkMode}
           style={{ transform: [{ scaleX: 0.7 }, { scaleY: 0.7 }] }}
-        />
-       {/* <Ionicons
+        /> */}
+      {/* <Ionicons
           name={!isDarkMode ? 'md-sunny' : 'md-moon'}
           size={24}
           color={!isDarkMode ? '#000000' : '#FFFFFF'}
         /> */}
-      </View>
+      {/* </View> */}
     </View>
   );
 };
@@ -41,23 +41,23 @@ export default Header;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: 'transparent',
-    height: 60,
-    paddingHorizontal: 20,
+    position: 'absolute',
+    display:"flex",
+    margin:20,
+    zIndex: 10,
+    flex:1
   },
-  headeTitle: {
-    fontWeight: 'bold',
-    fontSize: SIZES.h2,
-  },
-  switchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  switchText: {
-    marginHorizontal: 5,
-    fontWeight: 'bold',
-  },
+  iconWrapper:{height:40,width:40,backgroundColor:"gray", justifyContent:"center",alignItems:"center", borderRadius:20,opacity:0.7}
+  // headeTitle: {
+  //   fontWeight: 'bold',
+  //   fontSize: SIZES.h2,
+  // },
+  // switchContainer: {
+  //   flexDirection: 'row',
+  //   alignItems: 'center',
+  // },
+  // switchText: {
+  //   marginHorizontal: 5,
+  //   fontWeight: 'bold',
+  // },
 });

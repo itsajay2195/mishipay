@@ -42,3 +42,20 @@ export const fetchRegionResults = async region => {
 };
 
 
+export const fetchCountryByCode = async code => {
+  let url = `https://restcountries.com/v3.1/alpha/${code}?fields=name,capital,currencies,population,region,subregion,borders,flags`;
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
+export const fetchCountryData = async (codes) => {
+  const promises = codes.map((code) => fetchCountryByCode(code.toLowerCase()));
+  const data = await Promise.all(promises);
+  return data;
+};
