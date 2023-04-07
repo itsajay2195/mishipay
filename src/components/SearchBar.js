@@ -1,10 +1,10 @@
 import {StyleSheet, TextInput, View} from 'react-native';
-import React from 'react';
+import React,{useMemo} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {COLORS} from '../styles';
 
 const SearchBar = ({onChangeText, value,isDarkTheme}) => {
-  const styles = getStyles(isDarkTheme);
+  const styles = useMemo(() => getStyles(isDarkTheme), [isDarkTheme]);
   return (
     <View
       style={styles.container}>

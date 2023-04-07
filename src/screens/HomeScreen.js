@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React, {useContext, useEffect, useState, useCallback} from 'react';
+import React, {useContext, useEffect, useState, useCallback, useMemo} from 'react';
 import {AppContext} from '../context/AppContext';
 import List from '../components/HomeScreenComponent/List';
 import {fetchcountries, fetchSearchResults, resetPage} from '../utils/helpers';
@@ -14,7 +14,7 @@ const HomeScreen = () => {
     useContext(AppContext);
   const [searchText] = useState(null);
   const [filtereData, setFilteredData] = useState([]);
-  const styles = getStyles(isDarkTheme);
+  const styles = useMemo(() => getStyles(isDarkTheme), [isDarkTheme]);
 
   const resetFilteredData= ()=> setFilteredData([])
   const resetSearchText= ()=> handleSearch("")
@@ -25,7 +25,6 @@ const HomeScreen = () => {
 
   useEffect(() => {
     if (regions.length <= 0) {
-      console.log('ue2');
       let regionsFilter = countries
         .map(item => item.region) // extract the regions from the objects
         .filter((value, index, self) => self.indexOf(value) === index)

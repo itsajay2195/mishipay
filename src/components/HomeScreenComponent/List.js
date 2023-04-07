@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import {
   StyleSheet,
   Text,
@@ -19,7 +19,7 @@ let navRef;
 
 const renderItem = (item, isDarkTheme) => {
   const { population, region, capital } = item;
-  const styles = getStyles(isDarkTheme);
+  const styles = useMemo(() => getStyles(isDarkTheme), [isDarkTheme]);
 
   return (
     <TouchableOpacity

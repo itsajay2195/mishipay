@@ -4,7 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 import { LOGGED_IN_SCREEN_NAME } from '../constants/screenConstants';
 import { COLORS } from '../styles';
 
-const Header = ({isDarkTheme}) => {
+const Header = () => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>

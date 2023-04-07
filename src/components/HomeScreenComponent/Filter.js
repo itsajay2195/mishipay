@@ -1,5 +1,5 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState, useMemo} from 'react';
 import {COLORS} from '../../styles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {AppContext} from '../../context/AppContext';
@@ -12,7 +12,7 @@ const Filter = ({resetFilteredData}) => {
   const {regions, setCountries, isDarkTheme} = useContext(AppContext);
   const [showDD, setShowDD] = useState(false);
   const [value, setValue] = useState(null);
-  const styles = getStyles(isDarkTheme);
+  const styles = useMemo(() => getStyles(isDarkTheme), [isDarkTheme]);
 
   useEffect(() => {
     if (value) {
